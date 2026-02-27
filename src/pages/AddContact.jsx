@@ -12,8 +12,9 @@ export const AddContact = () => {
     const [email, setEmail] = useState("");
     const [address, setAddress] = useState("");
 
-    
-    const handleSubmit = (event) => {event.preventDefault(); 
+
+    const handleSubmit = (event) => {
+        event.preventDefault();
 
         //logica fetch
 
@@ -32,7 +33,7 @@ export const AddContact = () => {
 
                 console.log("Contacto creado:", data);
 
-                
+
                 navigate("/");
 
             })
@@ -47,13 +48,14 @@ export const AddContact = () => {
 
                     <h2 className="mb-4 text-center">Add a new contact</h2>
 
-                   
+
                     <form onSubmit={handleSubmit}>
 
                         <div className="mb-3">
                             <label className="form-label">Full name</label>
                             <input
                                 type="text"
+                                placeholder="full name"
                                 className="form-control"
                                 value={name}
                                 onChange={(e) => setName(e.target.value)}
@@ -62,9 +64,10 @@ export const AddContact = () => {
                         </div>
 
                         <div className="mb-3">
-                            <label className="form-label">phone</label>
+                            <label className="form-label">Phone</label>
                             <input
                                 type="text"
+                                placeholder="phone number"
                                 className="form-control"
                                 value={phone}
                                 onChange={(e) => setPhone(e.target.value)}
@@ -73,9 +76,10 @@ export const AddContact = () => {
                         </div>
 
                         <div className="mb-3">
-                            <label className="form-label">email</label>
+                            <label className="form-label">Email</label>
                             <input
                                 type="email"
+                                placeholder="email address"
                                 className="form-control"
                                 value={email}
                                 onChange={(e) => setEmail(e.target.value)}
@@ -84,9 +88,10 @@ export const AddContact = () => {
                         </div>
 
                         <div className="mb-3">
-                            <label className="form-label">address</label>
+                            <label className="form-label">Address</label>
                             <input
                                 type="text"
+                                placeholder="address"
                                 className="form-control"
                                 value={address}
                                 onChange={(e) => setAddress(e.target.value)}
@@ -99,8 +104,7 @@ export const AddContact = () => {
                         </button>
 
                     </form>
-
-                    {/* LINK FUERA DEL FORM */}
+                    
                     <div className="mt-3 text-center">
                         <Link to="/" style={{ textDecoration: "none" }}>
                             <p>or get back to contacts</p>

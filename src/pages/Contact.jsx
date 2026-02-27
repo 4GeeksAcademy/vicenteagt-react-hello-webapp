@@ -1,5 +1,5 @@
 import React, { useEffect } from "react";
-import useGlobalReducer  from "../hooks/useGlobalReducer.jsx";
+import useGlobalReducer from "../hooks/useGlobalReducer.jsx";
 import { Link } from "react-router-dom";
 import CardContact from "../components/CardContact";
 
@@ -9,7 +9,7 @@ export const Contact = () => {
 
     const API_URL = "https://playground.4geeks.com/contact";
 
-      //logica fetchs
+    //logica fetchs
     const getAgenda = () => {
 
         fetch(API_URL + "/agendas/vicente")
@@ -37,7 +37,7 @@ export const Contact = () => {
             .catch((error) => console.log("error:", error));
     };
 
-   
+
     const getContacts = () => {
 
         fetch(API_URL + "/agendas/vicente/contacts")
@@ -55,24 +55,24 @@ export const Contact = () => {
 
     const deleteContact = (id) => {
 
-    
-    dispatch({
-        type: "delete_contact",
-        payload: id
-    });
 
-
-    fetch(API_URL + "/agendas/vicente/contacts/" + id, {
-        method: "DELETE"
-    })
-        .then(response => response.json())
-        .then(() => {
-            console.log("Deleted in api");
-        })
-        .catch((error) => {
-            console.log("error:", error);
+        dispatch({
+            type: "delete_contact",
+            payload: id
         });
-};
+
+
+        fetch(API_URL + "/agendas/vicente/contacts/" + id, {
+            method: "DELETE"
+        })
+            .then(response => response.json())
+            .then(() => {
+                console.log("Deleted in api");
+            })
+            .catch((error) => {
+                console.log("error:", error);
+            });
+    };
 
     useEffect(() => {
         getAgenda();
@@ -92,24 +92,24 @@ export const Contact = () => {
             </div>
             <div className="row">
                 <div className="col">
-                   {store.contacts.length === 0 ? (
-  <div className="text-center mt-5">
-        <h5 className="text-muted">
-            No tienes contactos agregados aún
-        </h5>
-    </div>
-) : (
+                    {store.contacts.length === 0 ? (
+                        <div className="text-center mt-5">
+                            <h5 className="text-muted">
+                                No tienes contactos agregados aún
+                            </h5>
+                        </div>
+                    ):(
 
-    store.contacts.map((contact) => (
-        <CardContact
-            key={contact.id}
-            contact={contact}
-            deleteContact={deleteContact}
-        />
-    ))
+                        store.contacts.map((contact) => (
+                            <CardContact
+                                key={contact.id}
+                                contact={contact}
+                                deleteContact={deleteContact}
+                            />
+                        ))
 
-)}
-      </div>
+                    )}
+                </div>
             </div>
 
         </div>
