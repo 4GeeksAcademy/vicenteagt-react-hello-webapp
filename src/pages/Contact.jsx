@@ -12,30 +12,37 @@ export const Contact = () => {
     //logica fetchs
     const getAgenda = () => {
 
-        fetch(API_URL + "/agendas/vicente")
-            .then((response) => {
+    fetch(API_URL + "/agendas/vicente")
+        .then((response) => {
 
-                if (response.status === 404) {
-                    createAgenda();
-                }
+            if (response.status === 404) {
+                createAgenda();
+                return null; 
+            }
 
-                return response.json();
-            })
-            .then((data) => console.log(data))
-            .catch((error) => console.log("error:", error));
-    };
+            return response.json();
+        })
+        .then((data) => {
+            if (data) {
+                getContacts(); 
+            }
+        })
+        .catch((error) => console.log("error:", error));
+};
 
 
     const createAgenda = () => {
 
-        fetch(API_URL + "/agendas/vicente", {
-            method: "POST",
-            headers: { "Content-Type": "application/json" }
+    fetch(API_URL + "/agendas/vicente", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" }
+    })
+        .then(response => response.json())
+        .then(() => {
+            getContacts(); 
         })
-            .then(response => response.json())
-            .then((data) => console.log(data))
-            .catch((error) => console.log("error:", error));
-    };
+        .catch((error) => console.log("error:", error));
+};
 
 
     const getContacts = () => {
@@ -67,7 +74,7 @@ export const Contact = () => {
         })
             .then(response => response.json())
             .then(() => {
-                console.log("Deleted in api");
+                console.log("Eliminado en api");
             })
             .catch((error) => {
                 console.log("error:", error);
@@ -75,9 +82,8 @@ export const Contact = () => {
     };
 
     useEffect(() => {
-        getAgenda();
-        getContacts();
-    }, []);
+    getAgenda();
+}, []);
 
     return (
         <div className="container mt-5">
